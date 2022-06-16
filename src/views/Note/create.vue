@@ -9,19 +9,31 @@
 
 					<v-form ref="form" lazy-validation v-model="valid" class="pa-5">
 						<v-row>
-							<v-col cols="12" sm="6" md="3">
-								<v-text-field dense outlined v-model="name" :rules="form.rules.name" hint="Enter a short and unique note name." label="Name" required></v-text-field>
-							</v-col>
+							<v-col cols="md-6">
+								<v-row>
+									<v-col cols="12">
+										<v-text-field dense outlined v-model="name" :rules="form.rules.name" label="Name" required></v-text-field>
+									</v-col>
 
-							<v-col md="12">
-								<v-combobox :items="all" v-model="select" label="Select Tag" multiple chips clear-icon="mdi-close-circle" deletable-chips></v-combobox>
+									<v-col cols="6">
+										<v-combobox :items="tags" v-model="tag" label="Tag(s)" multiple chips clear-icon="mdi-close-circle" deletable-chips></v-combobox>
+									</v-col>
+
+									<v-col cols="6">
+										<v-select :items="states" v-model="state" label="State" chips clear-icon="mdi-close-circle" deletable-chips></v-select>
+									</v-col>
+
+									<v-col cols="12">
+										<v-textarea dense outlined v-model="description" :rules="form.rules.description" label="Description" required></v-textarea>
+									</v-col>
+								</v-row>
 							</v-col>
 						</v-row>
 
 						<v-row>
 							<v-col cols="12" sm="6" md="4">
 								<v-btn color="primary" outlined @click="validate()" :disabled="!valid"> Save </v-btn>
-								<router-link :to="`/url-groups`">
+								<router-link :to="`/notes`">
 									<v-btn text> Cancel </v-btn>
 								</router-link>
 							</v-col>
@@ -49,8 +61,10 @@ export default {
 	beforeMount() {},
 	data() {
 		return {
-			all: ['one', 'two', 'three', 'four'],
-			select: ['one', 'two', 'three'],
+			tags: ['one', 'two', 'three', 'four'],
+			tag: [],
+			states: ['urgent', 'minor'],
+			state: [],
 			form: {
 				errors: {},
 				rules: {
