@@ -47,16 +47,10 @@
 
 						<template v-slot:item.id="{ item }">
 							<router-link :to="`/${name}/edit/${item.id}`">
-								<v-btn small outlined class="orange--text">
-									<!-- <v-icon small dark> edit </v-icon> -->
-									Edit
-								</v-btn>
+								<v-btn small outlined class="orange--text"> Edit </v-btn>
 							</router-link>
 							&nbsp;
-							<v-btn small outlined class="red--text" @click="handleDelete(item)">
-								<!-- <v-icon small dark> delete </v-icon> -->
-								Disable
-							</v-btn>
+							<v-btn small outlined class="red--text" @click="handleDelete(item)"> Delete </v-btn>
 						</template>
 					</v-data-table>
 				</v-col>
@@ -106,8 +100,12 @@ export default {
 	color: red;
 }
 
-.description {
+>>> .description {
 	overflow-wrap: normal;
 	color: green;
+}
+
+>>> li a {
+	text-decoration: none;
 }
 </style>
