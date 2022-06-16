@@ -3,7 +3,7 @@
 		<Breadcrumbs />
 		<v-row>
 			<v-col cols="12">
-				<v-card elevation="2"> </v-card>
+				<v-card elevation="2"> TEST </v-card>
 			</v-col>
 		</v-row>
 	</v-container>
