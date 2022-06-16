@@ -5,7 +5,7 @@
 
 			<v-spacer></v-spacer>
 
-			<span class="mr-2">{{ username }}</span>
+			<span class="mr-2">Bunlong</span>
 		</v-app-bar>
 
 		<v-navigation-drawer v-model="drawer" app class="grey lighten-1">
@@ -34,7 +34,7 @@ export default {
 			brandCode: 0,
 			drawer: true,
 			links: [
-				{ icon: 'mdi-home', text: 'Home', route: '/dashboard', newTab: false },
+				{ icon: 'mdi-home', text: 'Home', route: '/', newTab: false },
 				{ icon: 'mdi-note', text: 'Notes', route: '/notes', newTab: false }
 			]
 		}

@@ -5,6 +5,7 @@ import Home from '../views/Home/index.vue'
 
 import Note from '../views/Note/index.vue'
 import NoteShow from '../views/Note/show.vue'
+import NoteCreate from '../views/Note/create.vue'
 
 Vue.use(VueRouter)
 
@@ -19,6 +20,13 @@ const routes = [
 	{
 		path: '/notes',
 		component: Note,
+		meta: {
+			requiresAuth: false
+		}
+	},
+	{
+		path: '/notes/create',
+		component: NoteCreate,
 		meta: {
 			requiresAuth: false
 		}

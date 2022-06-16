@@ -5,9 +5,7 @@
 		<v-row>
 			<v-col cols="12">
 				<v-card elevation="2">
-					<PanelHeader type="create" icon="mdi-home" title="Home" subTitle="Welcome home!" name="Notes"> </PanelHeader>
-
-					<v-img :aspect-ratio="16 / 9" :width="width" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
+					<PanelHeader type="create" icon="mdi-note" title="Notes" subTitle="Fill in the details to create note" name="Notes"> </PanelHeader>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -25,7 +23,9 @@ export default {
 		PanelHeader
 	},
 	data() {
-		return {}
+		return {
+			campaigns: []
+		}
 	}
 }
 </script>

@@ -26,7 +26,7 @@ export default {
 				const link = {
 					text: i == 0 ? 'Home' : segments[i],
 					disabled: disabledLink,
-					href: i == 0 ? '/#/campaigns' : '/#/' + segments[i]
+					href: i == 0 ? '/#/' : '/#/' + segments[i]
 				}
 
 				links.push(link)
