@@ -5,7 +5,7 @@
 		<v-row>
 			<v-col cols="12">
 				<v-card elevation="2">
-					<PanelHeader type="create" icon="mdi-note" title="Note" subTitle="Fill in details to create Note" />
+					<PanelHeader type="update" icon="mdi-note" title="Note" subTitle="Fill in details to update Note" />
 
 					<v-form ref="form" lazy-validation v-model="valid" class="pa-5">
 						<v-row>
@@ -50,8 +50,6 @@ import Navbar from '../../components/Navbar'
 import Breadcrumbs from '../../components/Breadcrumbs'
 import PanelHeader from '../../components/PanelHeader'
 
-import axios from 'axios'
-
 export default {
 	components: {
 		Navbar,
@@ -79,6 +77,20 @@ export default {
 		}
 	},
 	methods: {
+		getData() {
+			console.log('%c ________________________________________________________________', 'background: linear-gradient(45deg, red, yellow, blue, green, purple)')
+			this.notes = JSON.parse(localStorage.getItem('notes'))
+
+			for (var i = 0; i < this.notes.length; i++) {
+				let note = this.notes[i]
+				if (note.id == this.$route.params.id) {
+					this.name = note.name
+					this.tag = note.tag
+					this.priority = note.priority
+					this.description = note.description
+				}
+			}
+		},
 		validate() {
 			this.$refs.form.validate()
 			if (this.$refs.form.validate()) {
@@ -102,9 +114,7 @@ export default {
 
 				localStorage.setItem('alert', true)
 				localStorage.setItem('alertColor', 'green')
-				localStorage.setItem('alertMessage', this.name + ' - created successfully!')
-
-				//make a POST to store data
+				localStorage.setItem('alertMessage', this.name + ' - updated successfully!')
 
 				this.$router.push({
 					path: `/notes`
@@ -113,6 +123,9 @@ export default {
 				console.info(this.form.values)
 			}
 		}
+	},
+	mounted() {
+		this.getData()
 	}
 }
 </script>

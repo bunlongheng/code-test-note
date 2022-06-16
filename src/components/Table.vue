@@ -48,7 +48,7 @@
 						</template>
 
 						<template v-slot:item.id="{ item }">
-							<router-link :to="`/${name}/edit/${item.id}`">
+							<router-link :to="`/${name}/${item.id}/edit`">
 								<v-btn small outlined class="orange--text"> Edit </v-btn>
 							</router-link>
 							&nbsp;

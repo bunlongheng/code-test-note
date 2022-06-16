@@ -6,6 +6,7 @@ import Home from '../views/Home/index.vue'
 import Note from '../views/Note/index.vue'
 import NoteShow from '../views/Note/show.vue'
 import NoteCreate from '../views/Note/create.vue'
+import NoteEdit from '../views/Note/edit.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,13 @@ const routes = [
 	{
 		path: '/notes/:id',
 		component: NoteShow,
+		meta: {
+			requiresAuth: false
+		}
+	},
+	{
+		path: '/notes/:id/edit',
+		component: NoteEdit,
 		meta: {
 			requiresAuth: false
 		}

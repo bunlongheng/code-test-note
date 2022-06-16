@@ -62,7 +62,6 @@ export default {
 		getData() {
 			this.notes = JSON.parse(localStorage.getItem('notes'))
 		},
-
 		deleteItem(item) {
 			for (var i = 0; i < this.notes.length; i++) {
 				let note = this.notes[i]
@@ -80,7 +79,6 @@ export default {
 			this.getData()
 		}
 	},
-
 	mounted() {
 		this.checkLocalStorage()
 		this.getData()
