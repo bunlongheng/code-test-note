@@ -33,32 +33,16 @@
 							<router-link :to="`/${name}/${item.id}`"> {{ item.name }}</router-link>
 						</template>
 
-						<template v-slot:item.type_name="{ item }">
-							<v-chip small outlined :color="`${displayChipColor(item.type_name)}`">
-								{{ displayType(item.type_name) }}
-							</v-chip>
+						<template v-slot:item.priority="{ item }">
+							{{ item.priority }}
 						</template>
 
-						<template v-slot:item.details.length="{ item }">
-							{{ item.details.length }}
+						<template v-slot:item.tag="{ item }">
+							<v-chip small outlined class="ma-2" v-for="tag in item.tag"> {{ tag }} </v-chip>
 						</template>
 
-						<template v-slot:item.rules.length="{ item }">
-							<v-text class="ma-2" color="grey darken-1">
-								{{ item.rules.length }}
-							</v-text>
-						</template>
-
-						<template v-slot:item.start_date="{ item }">
-							{{ new Date(item.start_date).toLocaleDateString() }}
-						</template>
-
-						<template v-slot:item.end_date="{ item }">
-							{{ new Date(item.end_date).toLocaleDateString() }}
-						</template>
-
-						<template v-slot:item.details="{ item }">
-							<v-chip small outlined class="ma-2" v-for="detail in item.details"> {{ detail.url }} </v-chip>
+						<template v-slot:item.description="{ item }" class="description" style="overflow-wrap: normal">
+							{{ item.description }}
 						</template>
 
 						<template v-slot:item.id="{ item }">
@@ -116,3 +100,14 @@ export default {
 	mounted() {}
 }
 </script>
+<style scoped>
+>>> .description {
+	overflow-wrap: normal;
+	color: red;
+}
+
+.description {
+	overflow-wrap: normal;
+	color: green;
+}
+</style>

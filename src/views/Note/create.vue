@@ -15,12 +15,12 @@
 										<v-text-field dense outlined v-model="name" :rules="form.rules.name" label="Name" required></v-text-field>
 									</v-col>
 
-									<v-col cols="6">
+									<v-col cols="8">
 										<v-combobox :items="tags" v-model="tag" label="Tag(s)" multiple chips clear-icon="mdi-close-circle" deletable-chips></v-combobox>
 									</v-col>
 
-									<v-col cols="6">
-										<v-select :items="states" v-model="state" label="State" chips clear-icon="mdi-close-circle" deletable-chips></v-select>
+									<v-col cols="4">
+										<v-select :items="priorities" v-model="priority" label="priority" chips clear-icon="mdi-close-circle" deletable-chips></v-select>
 									</v-col>
 
 									<v-col cols="12">
@@ -61,10 +61,13 @@ export default {
 	beforeMount() {},
 	data() {
 		return {
+			notes: [],
+			note: {},
 			tags: ['one', 'two', 'three', 'four'],
 			tag: [],
-			states: ['urgent', 'minor'],
-			state: [],
+			priorities: ['urgent', 'minor'],
+			priority: '',
+			description: '',
 			form: {
 				errors: {},
 				rules: {
@@ -80,9 +83,24 @@ export default {
 		validate() {
 			this.$refs.form.validate()
 			if (this.$refs.form.validate()) {
+				this.notes = JSON.parse(localStorage.getItem('notes'))
+
+				let note = {}
+				note.id = this.notes.length + 1
+				note.name = this.name
+				note.tag = this.tag
+				note.priority = this.priority
+				note.description = this.description
+
+				this.notes.push(note)
+
+				localStorage.setItem('notes', JSON.stringify(this.notes))
+
 				localStorage.setItem('alert', true)
 				localStorage.setItem('alertColor', 'green')
 				localStorage.setItem('alertMessage', this.name + ' - created successfully!')
+
+				//make a POST to store data
 
 				this.$router.push({
 					path: `/notes`
