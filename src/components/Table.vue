@@ -41,8 +41,10 @@
 							<v-chip small outlined class="ma-2" v-for="tag in item.tag"> {{ tag }} </v-chip>
 						</template>
 
-						<template v-slot:item.description="{ item }" class="description" style="overflow-wrap: normal">
-							{{ item.description }}
+						<template v-slot:item.description="{ item }" style="overflow-wrap: normal">
+							<div class="description">
+								{{ item.description }}
+							</div>
 						</template>
 
 						<template v-slot:item.id="{ item }">
@@ -96,16 +98,13 @@ export default {
 </script>
 <style scoped>
 >>> .description {
-	overflow-wrap: normal;
-	color: red;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 250px;
 }
 
->>> .description {
-	overflow-wrap: normal;
-	color: green;
-}
-
->>> li a {
-	text-decoration: none;
+>>> td a {
+	text-decoration: none !important;
 }
 </style>

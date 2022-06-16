@@ -40,7 +40,7 @@ export default {
 				},
 				{ text: 'Priority', value: 'priority', width: '10%' },
 				{ text: 'Tags', value: 'tag', width: '30%' },
-				// { text: 'Description', value: 'description', width: '20%' },
+				{ text: 'Description', value: 'description', width: '20%' },
 				{ text: 'Actions', value: 'id', width: '20%' }
 			],
 			notes: []
