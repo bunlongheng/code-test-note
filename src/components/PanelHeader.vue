@@ -17,7 +17,7 @@
 				</v-btn>
 			</router-link>
 
-			<router-link v-if="type == 'show'" :to="`/${name.toLowerCase().replace(' ', '-')}/edit/${this.$route.params.id}`">
+			<router-link v-if="type == 'show'" :to="`/${name.toLowerCase().replace(' ', '-')}/${this.$route.params.id}/edit`">
 				<v-btn outlined class="orange--text mt-5 mr-8" :id="`edit-${name.toLowerCase().replace(' ', '-')}`">
 					<!-- <v-icon small dark> edit </v-icon> -->
 					Edit

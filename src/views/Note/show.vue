@@ -5,7 +5,7 @@
 		<v-row>
 			<v-col cols="12">
 				<v-card elevation="2">
-					<PanelHeader type="update" icon="mdi-note" title="Note" subTitle="Fill in details to update Note" />
+					<PanelHeader type="show" icon="mdi-note" name="Notes" title="Note" subTitle="Fill in details to update Note" />
 
 					<v-form ref="form" lazy-validation v-model="valid" class="pa-5">
 						<v-row>
@@ -34,15 +34,6 @@
 										<img class="image" :src="img" width="100%" />
 									</v-col>
 								</v-row>
-							</v-col>
-						</v-row>
-
-						<v-row>
-							<v-col cols="12" sm="6" md="4">
-								<v-btn color="primary" outlined @click="validate()" :disabled="!valid"> Save </v-btn>
-								<router-link :to="`/notes`">
-									<v-btn text> Cancel </v-btn>
-								</router-link>
 							</v-col>
 						</v-row>
 					</v-form>
@@ -142,5 +133,9 @@ export default {
 .image {
 	border: 3px solid black !important;
 	border-radius: 10px !important;
+}
+
+div a {
+	text-decoration: none !important;
 }
 </style>
