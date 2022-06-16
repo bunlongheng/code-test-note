@@ -1,7 +1,7 @@
 <template id="breadcrumb">
 	<v-row>
 		<v-breadcrumbs :items="links" class="black--text">
-			<template v-slot:divider><v-icon>navigate_next</v-icon></template>
+			<template v-slot:divider><v-icon>mdi-navigate_next</v-icon></template>
 		</v-breadcrumbs>
 	</v-row>
 </template>

@@ -6,32 +6,11 @@
 			<v-spacer></v-spacer>
 
 			<span class="mr-2">{{ username }}</span>
-
-			<v-menu bottom offset-y>
-				<template v-slot:activator="{ on, attrs }">
-					<v-btn right icon v-bind="attrs" v-on="on">
-						<v-icon>expand_more</v-icon>
-					</v-btn>
-				</template>
-
-				<v-list>
-					<v-list-item>
-						<v-list-item-action>
-							<v-icon @click="logout">logout</v-icon>
-						</v-list-item-action>
-						<v-list-item-content>
-							<v-list-item-title @click="logout"> Logout </v-list-item-title>
-						</v-list-item-content>
-					</v-list-item>
-				</v-list>
-			</v-menu>
 		</v-app-bar>
 
 		<v-navigation-drawer v-model="drawer" app class="grey lighten-1">
 			<v-list>
-				<v-toolbar-title>Note Test</v-toolbar-title>
-
-				<!-- <img class="ml-5 mb-3" src="https://i.imgur.com/IOfXcqC.png" width="70" /> -->
+				<img class="ml-5 mb-3" src="https://www.bunlongheng.com/assets/fe/img/favicon/local/favicon-prod.png" width="100" />
 
 				<v-list-item v-for="link in computedLinks" :key="link.text" v-bind="link.linkProps">
 					<v-list-item-action>
@@ -46,8 +25,6 @@
 	</nav>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
 	data() {
 		return {
@@ -57,9 +34,8 @@ export default {
 			brandCode: 0,
 			drawer: true,
 			links: [
-				// { icon: 'home', text: 'Dashboard', route: '/dashboard', newTab: false },
-
-				{ icon: 'qr_code', text: 'Notes', route: '/notes', newTab: false }
+				{ icon: 'mdi-home', text: 'Home', route: '/dashboard', newTab: false },
+				{ icon: 'mdi-note', text: 'Notes', route: '/notes', newTab: false }
 			]
 		}
 	},

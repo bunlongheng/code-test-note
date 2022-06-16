@@ -5,13 +5,12 @@
 		<v-row>
 			<v-col cols="12">
 				<v-card elevation="2">
-					<v-row class="pl-5">
-						<v-card-title class="pb-0">
-							<v-icon left x-large color="primary"> {{ icon }}</v-icon>
-							<span class="font-weight-bold">{{ title }}</span>
-						</v-card-title>
-						<v-spacer></v-spacer>
-					</v-row>
+					<v-card-title class="pb-0">
+						<v-icon left x-large color="primary"> {{ icon }}</v-icon>
+						<span class="font-weight-bold">{{ title }}</span>
+					</v-card-title>
+
+					<v-img :aspect-ratio="16 / 9" :width="width" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -28,7 +27,10 @@ export default {
 		subtitle: String,
 		type: String
 	},
-	components: { Breadcrumbs }
+	components: { Breadcrumbs },
+	data() {
+		return {}
+	}
 }
 </script>
 <style scoped></style>

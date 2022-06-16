@@ -1,7 +1,7 @@
 <template>
 	<div class="dashboard">
 		<Navbar />
-		<Panel type="dashboard" title="Dashboard" icon="home" subtitle="Overview details of our consumer engagement" />
+		<Panel title="Home" icon="mdi-home" subtitle="Overview details of the dashboard." />
 	</div>
 </template>
 
@@ -14,6 +14,9 @@ export default {
 	components: {
 		Navbar,
 		Panel
+	},
+	data() {
+		return {}
 	}
 }
 </script>
