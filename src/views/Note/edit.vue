@@ -44,7 +44,7 @@
 
 						<v-row>
 							<v-col cols="12" sm="6" md="4">
-								<v-btn color="primary" outlined @click="validate()" :disabled="!valid"> Save </v-btn>
+								<v-btn color="primary" outlined @click="done()" :disabled="!valid"> Done </v-btn>
 								<router-link :to="`/notes`">
 									<v-btn text> Cancel </v-btn>
 								</router-link>
@@ -71,6 +71,8 @@ export default {
 	beforeMount() {},
 	data() {
 		return {
+			id: 0,
+			name: '',
 			notes: [],
 			tags: ['one', 'two', 'three', 'four'],
 			tag: [],
@@ -84,9 +86,9 @@ export default {
 					name: [(v) => !!v || 'Name is required']
 				}
 			},
-			name: '',
 			valid: false,
-			showImage: true
+			showImage: true,
+			imageUpdated: false
 		}
 	},
 	methods: {
@@ -96,6 +98,7 @@ export default {
 			for (var i = 0; i < this.notes.length; i++) {
 				let note = this.notes[i]
 				if (note.id == this.$route.params.id) {
+					this.id = note.id
 					this.name = note.name
 					this.img = note.img
 					this.tag = note.tag
@@ -106,6 +109,7 @@ export default {
 		},
 		upload(img) {
 			this.showImage = false
+			this.imageUpdated = false
 
 			var reader = new FileReader()
 			reader.onloadend = function () {
@@ -115,7 +119,7 @@ export default {
 			}
 			reader.readAsDataURL(img)
 		},
-		validate() {
+		done() {
 			this.$refs.form.validate()
 			if (this.$refs.form.validate()) {
 				this.notes = JSON.parse(localStorage.getItem('notes'))
@@ -128,11 +132,21 @@ export default {
 				let note = {}
 				note.id = this.notes.length + 1
 				note.name = this.name
+				note.img = localStorage.getItem('imgBase64')
 				note.tag = this.tag
 				note.priority = this.priority
 				note.description = this.description
 
-				this.notes.push(note)
+				//update
+				for (var i = 0; i < this.notes.length; i++) {
+					if (this.notes[i].id == this.id) {
+						this.notes[i] = note
+					}
+				}
+
+				if (this.imageUpdated) {
+					localStorage.removeItem('imgBase64')
+				}
 
 				localStorage.setItem('notes', JSON.stringify(this.notes))
 
