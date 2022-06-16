@@ -58,10 +58,8 @@ export default {
 			drawer: true,
 			links: [
 				// { icon: 'home', text: 'Dashboard', route: '/dashboard', newTab: false },
-				{ icon: 'leaderboard', text: 'Analytics', route: 'https://app3.vi3global.com/vi3-insight/login.html', newTab: true },
-				{ icon: 'qr_code', text: 'Campaigns', route: '/campaigns', newTab: false },
-				{ icon: 'link', text: 'URL Groups', route: '/url-groups', newTab: false },
-				{ icon: 'support', text: 'Support', route: 'https://support.vi3global.com/hc/en-us', newTab: true }
+
+				{ icon: 'qr_code', text: 'Notes', route: '/notes', newTab: false }
 			]
 		}
 	},
@@ -69,6 +67,23 @@ export default {
 		logout() {
 			this.$store.dispatch('logout').then(() => {
 				this.$router.push('/')
+			})
+		}
+	},
+	computed: {
+		computedLinks() {
+			return this.links.map((link) => {
+				// use `href` for external links; and `to` for internal links
+				const linkProps = {
+					[/^((https?:)?\/\/)/.test(link.route) ? 'href' : 'to']: link.route
+				}
+				if (link.newTab) {
+					linkProps.target = '_blank'
+				}
+				return {
+					...link,
+					linkProps
+				}
 			})
 		}
 	}
