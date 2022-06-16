@@ -84,7 +84,7 @@ export default {
 			this.$emit('sortBy', this.status)
 		},
 		deleteConfirm() {
-			console.log(this.item)
+			// console.log(this.item)
 			this.$emit('deleteConfirm', this.item)
 			this.deleteStatus = false
 		},

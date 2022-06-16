@@ -15,6 +15,10 @@
 										<v-text-field dense outlined v-model="name" :rules="form.rules.name" label="Name" required></v-text-field>
 									</v-col>
 
+									<v-col cols="12">
+										<v-file-input show-size v-model="img" @change="upload(img)" label="Change Image"></v-file-input>
+									</v-col>
+
 									<v-col cols="8">
 										<v-combobox :items="tags" v-model="tag" label="Tag(s)" multiple chips clear-icon="mdi-close-circle" deletable-chips></v-combobox>
 									</v-col>
@@ -25,6 +29,14 @@
 
 									<v-col cols="12">
 										<v-textarea dense outlined v-model="description" :rules="form.rules.description" label="Description" required></v-textarea>
+									</v-col>
+								</v-row>
+							</v-col>
+
+							<v-col cols="md-6">
+								<v-row>
+									<v-col cols="12">
+										<img v-if="showImage" class="image" :src="img" width="100%" />
 									</v-col>
 								</v-row>
 							</v-col>
@@ -73,23 +85,35 @@ export default {
 				}
 			},
 			name: '',
-			valid: false
+			valid: false,
+			showImage: true
 		}
 	},
 	methods: {
 		getData() {
-			console.log('%c ________________________________________________________________', 'background: linear-gradient(45deg, red, yellow, blue, green, purple)')
 			this.notes = JSON.parse(localStorage.getItem('notes'))
 
 			for (var i = 0; i < this.notes.length; i++) {
 				let note = this.notes[i]
 				if (note.id == this.$route.params.id) {
 					this.name = note.name
+					this.img = note.img
 					this.tag = note.tag
 					this.priority = note.priority
 					this.description = note.description
 				}
 			}
+		},
+		upload(img) {
+			this.showImage = false
+
+			var reader = new FileReader()
+			reader.onloadend = function () {
+				console.log('RESULT', reader.result)
+				this.img = JSON.stringify(reader.result)
+				localStorage.setItem('imgBase64', reader.result)
+			}
+			reader.readAsDataURL(img)
 		},
 		validate() {
 			this.$refs.form.validate()

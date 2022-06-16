@@ -15,6 +15,10 @@
 										<v-text-field dense outlined v-model="name" :rules="form.rules.name" label="Name" required></v-text-field>
 									</v-col>
 
+									<v-col cols="12">
+										<v-file-input show-size v-model="img" @change="upload(img)" label="Image"></v-file-input>
+									</v-col>
+
 									<v-col cols="8">
 										<v-combobox :items="tags" v-model="tag" label="Tag(s)" multiple chips clear-icon="mdi-close-circle" deletable-chips></v-combobox>
 									</v-col>
@@ -79,6 +83,15 @@ export default {
 		}
 	},
 	methods: {
+		upload(img) {
+			var reader = new FileReader()
+			reader.onloadend = function () {
+				console.log('RESULT', reader.result)
+				this.img = JSON.stringify(reader.result)
+				localStorage.setItem('imgBase64', reader.result)
+			}
+			reader.readAsDataURL(img)
+		},
 		validate() {
 			this.$refs.form.validate()
 			if (this.$refs.form.validate()) {
@@ -92,11 +105,14 @@ export default {
 				let note = {}
 				note.id = this.notes.length + 1
 				note.name = this.name
+				note.img = localStorage.getItem('imgBase64')
 				note.tag = this.tag
 				note.priority = this.priority
 				note.description = this.description
 
 				this.notes.push(note)
+
+				localStorage.removeItem('imgBase64')
 
 				localStorage.setItem('notes', JSON.stringify(this.notes))
 
