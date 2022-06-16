@@ -85,6 +85,11 @@ export default {
 			if (this.$refs.form.validate()) {
 				this.notes = JSON.parse(localStorage.getItem('notes'))
 
+				//init
+				if (!this.notes) {
+					this.notes = []
+				}
+
 				let note = {}
 				note.id = this.notes.length + 1
 				note.name = this.name
