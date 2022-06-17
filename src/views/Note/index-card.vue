@@ -7,11 +7,45 @@
 		</v-snackbar>
 		<Navbar />
 		<Breadcrumbs />
+
 		<v-row>
-			<v-col cols="12">
-				<v-card elevation="2">
-					<PanelHeader type="index" icon="mdi-note" name="Notes" title="Notes" subTitle="Select any note to view, edit, or delete." />
-					<Table name="notes" :headers="headers" :items="notes" @deleteConfirm="deleteItem" />
+			<v-card :loading="loading" class="mx-auto my-12" max-width="374" v-if="notes.length == 0">
+				<template slot="progress">
+					<v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
+				</template>
+
+				<v-img height="250" src="https://i.imgur.com/k6ZWhpk.png"></v-img>
+
+				<v-card-title>No data available </v-card-title>
+
+				<v-divider class="mx-4"></v-divider>
+
+				<v-card-actions>
+					<v-btn color="deep-purple lighten-2" text @click="create"> Create </v-btn>
+				</v-card-actions>
+			</v-card>
+
+			<v-col cols="3" v-for="note in notes">
+				<v-card :loading="loading" max-width="374">
+					<template slot="progress">
+						<v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
+					</template>
+
+					<v-img height="250" :src="note.img"></v-img>
+
+					<v-card-title>{{ note.name }}</v-card-title>
+
+					<v-card-text>
+						<div>{{ note.description }}</div>
+					</v-card-text>
+
+					<v-card-text>
+						<v-chip-group v-model="selection" active-class="deep-purple accent-4 white--text" column>
+							<v-chip v-for="tag in note.tag">
+								{{ tag }}
+							</v-chip>
+						</v-chip-group>
+					</v-card-text>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -31,7 +65,6 @@ export default {
 			alertColor: localStorage.getItem('alertColor'),
 			alertMessage: localStorage.getItem('alertMessage'),
 			headers: [
-				{ text: 'Image', value: 'img', width: '10%' },
 				{
 					text: 'Title',
 					align: 'start',
@@ -40,12 +73,11 @@ export default {
 					width: '20%'
 				},
 				{ text: 'Priority', value: 'priority', width: '10%' },
-				{ text: 'Tags', value: 'tag', width: '20%' },
+				{ text: 'Tags', value: 'tag', width: '30%' },
 				{ text: 'Description', value: 'description', width: '20%' },
 				{ text: 'Actions', value: 'id', width: '20%' }
 			],
-			notes: [],
-			selectedView: 0
+			notes: []
 		}
 	},
 	components: {
@@ -54,6 +86,7 @@ export default {
 		PanelHeader,
 		Table
 	},
+	computed: {},
 	methods: {
 		checkLocalStorage() {
 			localStorage.removeItem('alert')
@@ -62,14 +95,10 @@ export default {
 		},
 		getData() {
 			this.notes = JSON.parse(localStorage.getItem('notes'))
-
-			let selectedView = localStorage.getItem('selectedView')
-
-			if (selectedView) {
-				this.selectedView = selectedView
-			} else {
-				this.selectedView = 0
-			}
+		},
+		create() {
+			// redirect
+			// window.location.replace('http://www.w3schools.com')
 		},
 		deleteItem(item) {
 			for (var i = 0; i < this.notes.length; i++) {

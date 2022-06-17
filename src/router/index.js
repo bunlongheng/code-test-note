@@ -8,6 +8,8 @@ import NoteShow from '../views/Note/show.vue'
 import NoteCreate from '../views/Note/create.vue'
 import NoteEdit from '../views/Note/edit.vue'
 
+import NoteCard from '../views/Note/index-card.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +23,13 @@ const routes = [
 	{
 		path: '/notes',
 		component: Note,
+		meta: {
+			requiresAuth: false
+		}
+	},
+	{
+		path: '/cards',
+		component: NoteCard,
 		meta: {
 			requiresAuth: false
 		}

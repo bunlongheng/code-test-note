@@ -1,7 +1,11 @@
 <template>
 	<nav>
-		<v-app-bar app color="primary" dark>
+		<v-app-bar app color="grey darken-3" dark>
 			<v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+			<v-spacer></v-spacer>
+
+			<!-- <Switcher @updateView="selectedView" /> -->
 
 			<v-spacer></v-spacer>
 
@@ -10,7 +14,7 @@
 
 		<v-navigation-drawer v-model="drawer" app class="grey lighten-1">
 			<v-list>
-				<img class="ml-5 mb-3" src="https://www.bunlongheng.com/assets/fe/img/favicon/local/favicon-prod.png" width="100" />
+				<img class="ml-5 mb-3" src="../assets/logo.png" width="100" />
 
 				<v-list-item v-for="link in computedLinks" :key="link.text" v-bind="link.linkProps">
 					<v-list-item-action>
@@ -25,6 +29,8 @@
 	</nav>
 </template>
 <script>
+import Switcher from './Switcher'
+
 export default {
 	data() {
 		return {
@@ -35,15 +41,24 @@ export default {
 			drawer: true,
 			links: [
 				{ icon: 'mdi-home', text: 'Home', route: '/', newTab: false },
-				{ icon: 'mdi-note', text: 'Notes', route: '/notes', newTab: false }
-			]
+				{ icon: 'mdi-sort', text: 'Notes (List)', route: '/notes', newTab: false },
+				{ icon: 'mdi-card', text: 'Notes (Card)', route: '/cards', newTab: false }
+			],
+			selectedView: ''
 		}
+	},
+	components: {
+		Switcher
 	},
 	methods: {
 		logout() {
 			this.$store.dispatch('logout').then(() => {
 				this.$router.push('/')
 			})
+		},
+		updateView(selectedView) {
+			console.log('selectedView', selectedView)
+			localStorage.setItem('selectedView', selectedView)
 		}
 	},
 	computed: {

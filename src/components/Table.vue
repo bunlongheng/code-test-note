@@ -29,6 +29,12 @@
 
 				<v-col cols="12">
 					<v-data-table :headers="headers" :items="items" :search="search">
+						<template v-slot:item.img="{ item }">
+							<div class="pt-2">
+								<img class="image" :src="item.img" width="50%" height="50" />
+							</div>
+						</template>
+
 						<template v-slot:item.name="{ item }">
 							<router-link :to="`/${name}/${item.id}`"> {{ item.name }}</router-link>
 						</template>
@@ -106,5 +112,9 @@ export default {
 
 >>> td a {
 	text-decoration: none !important;
+}
+
+>>> td {
+	vertical-align: middle !important;
 }
 </style>

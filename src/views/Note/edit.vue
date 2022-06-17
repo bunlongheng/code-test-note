@@ -36,7 +36,7 @@
 							<v-col cols="md-6">
 								<v-row>
 									<v-col cols="12">
-										<img v-if="showImage" class="image" :src="img" width="100%" />
+										<img v-if="showImage" class="image" :src="img" width="100%" height="250" />
 									</v-col>
 								</v-row>
 							</v-col>
